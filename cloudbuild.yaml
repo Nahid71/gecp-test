@@ -1,10 +1,15 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - functions
-  - deploy
-  - hello_world
-  - --source=.
-  - --trigger-http
-  - --runtime=python37
-  - --allow-unauthenticated
+- name: 'python:3.7-slim'
+  entrypoint: /bin/sh
+  id: test
+  args: [-c, 'pip install -r requirements.txt && python sample_http_test.py -v']
+
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   args:
+#   - functions
+#   - deploy
+#   - hello_get
+#   - --source=.
+#   - --trigger-http
+#   - --runtime=python37
+#   - --allow-unauthenticated
